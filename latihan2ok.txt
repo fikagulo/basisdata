@@ -1,0 +1,141 @@
+MANIPULASI DATA (DML)
+  - Masuk ke Xampp
+  - Masuk ke CMD
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.37-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+  -Buat database dengan perintah "CREATE DATABASE LATIHAN2;
+  -Use LATIHAN2;
+MariaDB [(none)]> use latihan12
+Database changed
+MariaDB [latihan12]> \. D:\script\mahasiswa.sql
+Query OK, 0 rows affected (0.74 sec)
+
+MariaDB [latihan12]> desc mahasiswa;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| NIM          | varchar(13) | YES  |     | NULL    |       |
+| Nama         | varchar(14) | YES  |     | NULL    |       |
+| AlamatJalan  | tinytext    | YES  |     | NULL    |       |
+| Kota         | varchar(16) | YES  |     | NULL    |       |
+| KodePos      | int(17)     | YES  |     | NULL    |       |
+| noHP         | int(18)     | YES  |     | NULL    |       |
+| JenisKelamin | varchar(19) | YES  |     | NULL    |       |
+| TanggalLahir | varchar(20) | YES  |     | NULL    |       |
+| KodeDosen    | int(21)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+9 rows in set (0.14 sec)
+
+  -\. D:\script\isimahasiswa.sql
+MariaDB [latihan12]> \. D:\script\isimahasiswa.sql
+Query OK, 6 rows affected (0.16 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+  -Select*from mahasiswa;
+MariaDB [latihan12]> select*from mahasiswa;
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama          | AlamatJalan | Kota     | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| 11223344 | Ari Santoso   | jl. mawar   | Bekasi   |  501070 | 897433426 | Laki-Laki    | 1998-10-12   |     48767 |
+| 11223345 | Ario Talib    | jl. melati  | Cikarang |  501071 | 897433427 | Laki-Laki    | 1999-11-16   |     48768 |
+| 11223346 | Dina Marlina  | jl. puspa   | Karawang |  501072 | 897433428 | Perempuan    | 1997-12-01   |     48769 |
+| 11223347 | Lisa Ayu      | jl. daun    | Bekasi   |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
+| 11223348 | Tiara Wahidah | jl. kancil  | Bekasi   |  501074 | 897433430 | Perempuan    | 1980-02-05   |     48771 |
+| 11223349 | Anton Sinaga  | jl. beruang | Cikarang |  501074 | 897433431 | Laki-Laki    | 1988-03-10   |     48772 |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+6 rows in set (0.08 sec)
+  -Update mahasiswa setTanggalLahir='1979-08-31' where NIM='11223344';
+MariaDB [latihan12]> select*from mahasiswa;
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama          | AlamatJalan | Kota     | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| 11223344 | Ari Santoso   | jl. mawar   | Bekasi   |  501070 | 897433426 | Laki-Laki    | 1979-08-31   |     48767 |
+| 11223345 | Ario Talib    | jl. melati  | Cikarang |  501071 | 897433427 | Laki-Laki    | 1999-11-16   |     48768 |
+| 11223346 | Dina Marlina  | jl. puspa   | Karawang |  501072 | 897433428 | Perempuan    | 1997-12-01   |     48769 |
+| 11223347 | Lisa Ayu      | jl. daun    | Bekasi   |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
+| 11223348 | Tiara Wahidah | jl. kancil  | Bekasi   |  501074 | 897433430 | Perempuan    | 1980-02-05   |     48771 |
+| 11223349 | Anton Sinaga  | jl. beruang | Cikarang |  501074 | 897433431 | Laki-Laki    | 1988-03-10   |     48772 |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+6 rows in set (0.00 sec)
+  -Select NIM,Nama,AlamatJalan,Kota,KodePos,noHP,JenisKelamin,TanggalLahir,KodeDosen from mahasiswa where NIM='1122344';
+MariaDB [latihan12]> Select NIM,Nama,AlamatJalan,Kota,KodePos,noHP,JenisKelamin,TanggalLahir,KodeDosen from mahasiswa where NIM='11223344';
++----------+-------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama        | AlamatJalan | Kota   | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+-------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| 11223344 | Ari Santoso | jl. mawar   | Bekasi |  501070 | 897433426 | Laki-Laki    | 1979-08-31   |     48767 |
++----------+-------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+1 row in set (0.00 sec)
+  -Delete from mahasiswa where NIM='11223346';
+MariaDB [latihan12]> delete from mahasiswa where NIM='11223346';
+Query OK, 1 row affected (0.11 sec)
+  -Select*from mahasiswa where TanggalLahir>='1996-01-02';
+MariaDB [latihan12]> select*from mahasiswa where TanggalLahir>='1996-01-02';
++----------+------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama       | AlamatJalan | Kota     | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| 11223345 | Ario Talib | jl. melati  | Cikarang |  501071 | 897433427 | Laki-Laki    | 1999-11-16   |     48768 |
+| 11223347 | Lisa Ayu   | jl. daun    | Bekasi   |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
++----------+------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+2 rows in set (0.00 sec)
+  -select*from mahasiswa where Kota='Bekasi'and JenisKelamin='Perempuan';
+MariaDB [latihan12]> select*from mahasiswa where Kota='Bekasi' and JenisKelamin='Perempuan';
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama          | AlamatJalan | Kota   | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| 11223347 | Lisa Ayu      | jl. daun    | Bekasi |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
+| 11223348 | Tiara Wahidah | jl. kancil  | Bekasi |  501074 | 897433430 | Perempuan    | 1980-02-05   |     48771 |
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+2 rows in set (0.00 sec)
+  -select*from mahasiswa where Kota='Bekasi'and JenisKelamin='Laki-Laki' or TanggalLahir<='1997-02-20'and JenisKelamin='Perempuan';
+MariaDB [latihan12]> select*from mahasiswa where Kota='Bekasi' and JenisKelamin='Laki-Laki' or TanggalLahir<='1997-02-20'and JenisKelamin='Perempuan';
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama          | AlamatJalan | Kota   | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+| 11223344 | Ari Santoso   | jl. mawar   | Bekasi |  501070 | 897433426 | Laki-Laki    | 1979-08-31   |     48767 |
+| 11223347 | Lisa Ayu      | jl. daun    | Bekasi |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
+| 11223348 | Tiara Wahidah | jl. kancil  | Bekasi |  501074 | 897433430 | Perempuan    | 1980-02-05   |     48771 |
++----------+---------------+-------------+--------+---------+-----------+--------------+--------------+-----------+
+3 rows in set (0.04 sec)
+  -select Nama,AlamatJalan from mahasiswa;
+MariaDB [latihan12]> select Nama,AlamatJalan from mahasiswa;
++---------------+-------------+
+| Nama          | AlamatJalan |
++---------------+-------------+
+| Ari Santoso   | jl. mawar   |
+| Ario Talib    | jl. melati  |
+| Lisa Ayu      | jl. daun    |
+| Tiara Wahidah | jl. kancil  |
+| Anton Sinaga  | jl. beruang |
++---------------+-------------+
+5 rows in set (0.00 sec)
+  -select*from mahasiswa order by nama asc;
+MariaDB [latihan12]> select*from mahasiswa order by Nama asc;
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| NIM      | Nama          | AlamatJalan | Kota     | KodePos | noHP      | JenisKelamin | TanggalLahir | KodeDosen |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+| 11223349 | Anton Sinaga  | jl. beruang | Cikarang |  501074 | 897433431 | Laki-Laki    | 1988-03-10   |     48772 |
+| 11223344 | Ari Santoso   | jl. mawar   | Bekasi   |  501070 | 897433426 | Laki-Laki    | 1979-08-31   |     48767 |
+| 11223345 | Ario Talib    | jl. melati  | Cikarang |  501071 | 897433427 | Laki-Laki    | 1999-11-16   |     48768 |
+| 11223347 | Lisa Ayu      | jl. daun    | Bekasi   |  501073 | 897433429 | Perempuan    | 1996-01-02   |     48770 |
+| 11223348 | Tiara Wahidah | jl. kancil  | Bekasi   |  501074 | 897433430 | Perempuan    | 1980-02-05   |     48771 |
++----------+---------------+-------------+----------+---------+-----------+--------------+--------------+-----------+
+5 rows in set (0.07 sec)
+
+
+
+
+
+
+M
+
+
+
+
+
+
+
