@@ -1,0 +1,63 @@
+MEMBUAT DATABASE DASAR DI CMD
+ -Masuk ke xampp
+ -Masuk ke CMD
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.37-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database latihan16;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use latihan16;
+Database changed
+MariaDB [latihan16]> create table mahasiswa(nama varchar(13),kelas varchar(15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [latihan16]> create table mahasiswa(nama varchar(13),kelas varchar(15));
+Query OK, 0 rows affected (0.28 sec)
+
+MariaDB [latihan16]> desc mahasiswa;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nama  | varchar(13) | YES  |     | NULL    |       |
+| kelas | varchar(15) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+MariaDB [latihan16]> alter table mahasiswa add column int(16) after nama;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int(16) after nama'
+ at line 1
+MariaDB [latihan16]> alter table mahasiswa add column NIM int(16) after nama;
+Query OK, 0 rows affected (0.80 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan16]> desc mahasiswa;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nama  | varchar(13) | YES  |     | NULL    |       |
+| NIM   | int(16)     | YES  |     | NULL    |       |
+| kelas | varchar(15) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+MariaDB [latihan16]> alter table mahasiswa add primary key(NIM);
+Query OK, 0 rows affected (1.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan16]> desc mahasiswa;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| nama  | varchar(13) | YES  |     | NULL    |       |
+| NIM   | int(16)     | NO   | PRI | NULL    |       |
+| kelas | varchar(15) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+MariaDB [latihan16]>
