@@ -1,0 +1,148 @@
+MEMBUAT SQL LANJUTAN
+ -Masuk ke xampp
+ -Masuk ke CMD
+
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.37-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+ 
+MariaDB [(none)]> create database latihan14;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use latihan14;
+Database changed
+MariaDB [latihan14]> \. D:\script\sqldasar4\sqldasar4\table_mobil.sql
+Query OK, 0 rows affected (0.28 sec)
+
+MariaDB [latihan14]> desc mobil;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| kode  | varchar(15) | NO   | PRI | NULL    |       |
+| jenis | varchar(15) | NO   |     | NULL    |       |
+| merk  | varchar(20) | NO   |     | NULL    |       |
+| tarif | varchar(20) | NO   |     | NULL    |       |
+| nopol | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+MariaDB [latihan14]> \. D:\script\sqldasar4\sqldasar4\sewa.sql
+Query OK, 0 rows affected (0.30 sec)
+
+MariaDB [latihan14]> desc sewa;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| nofaktursewa  | varchar(15) | NO   |     | NULL    |       |
+| kodepelanggan | varchar(15) | YES  |     | NULL    |       |
+| tglsewa       | varchar(25) | YES  |     | NULL    |       |
+| kodemobil     | varchar(15) | NO   |     | NULL    |       |
+| lamasewa      | varchar(5)  | YES  |     | NULL    |       |
+| uangmuka      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.05 sec)
+MariaDB [latihan14]> \. D:\script\sqldasar4\sqldasar4\data_mobil.sql
+Query OK, 6 rows affected (0.07 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan14]> select*from mobil;
++------+-------+-----------+---------+----------+
+| kode | jenis | merk      | tarif   | nopol    |
++------+-------+-----------+---------+----------+
+| M001 | SEDAN | BMW E5    | 500000  | BG1234AA |
+| M002 | SEDAN | HONDA CRV | 350000  | BG2345BB |
+| M003 | BUS   | MERCEDEZ  | 1000000 | BG3456CC |
+| M004 | BUS   | DYNA      | 800000  | BG8433DD |
+| M005 | TRUCK | HYNO ZX   | 1500000 | BG4638EE |
+| M006 | TRUCK | DYNA X1   | 1500000 | BG8473FF |
++------+-------+-----------+---------+----------+
+6 rows in set (0.00 sec)
+
+MariaDB [latihan14]> \. D:\script\sqldasar4\sqldasar4\data_pelanggan.sql
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan14]> select*from pelanggan;
++------+--------------+--------+------------------------+----------+---------+---------+
+| kode | nama         | kontak | alamat                 | kota     | kodepos | telepon |
++------+--------------+--------+------------------------+----------+---------+---------+
+| P001 | PT FOX RIVER | HENDRA | JL. JEND. SUDIRMAN 657 | BENGKULU |   30245 | 1234567 |
+| P002 | CV FOXCON    | IWAN   | JL. WAHID HASYIM 743   | JAKARTA  |   73429 |  234567 |
+| P003 | PT FARMACON  | YANI   | JL. AHMAD DAHLAN 45    | LAMPUNG  |   28349 | 3334445 |
++------+--------------+--------+------------------------+----------+---------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [latihan14]> \. D:\script\sqldasar4\sqldasar4\data_sewa.sql
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan14]> select*from sewa;
++--------------+---------------+------------+-----------+----------+----------+
+| nofaktursewa | kodepelanggan | tglsewa    | kodemobil | lamasewa | uangmuka |
++--------------+---------------+------------+-----------+----------+----------+
+| F001         | P001          | 2008-12-01 | M001      | 2        | 200000   |
+| F001         | P001          | 2008-12-01 | M003      | 2        | 200000   |
+| F003         | P002          | 2008-12-02 | M002      | 1        | 100000   |
++--------------+---------------+------------+-----------+----------+----------+
+3 rows in set (0.00 sec)
+MariaDB [latihan14]> select
+    -> mobil.kode,
+    -> mobil.jenis,
+    -> mobil.merk,
+    -> sewa.nofaktursewa,
+    -> sewa.tglsewa,
+    -> sewa.uangmuka
+    -> from mobil
+    -> left join sewa on mobil.kode=sewa.kodemobil;
++------+-------+-----------+--------------+------------+----------+
+| kode | jenis | merk      | nofaktursewa | tglsewa    | uangmuka |
++------+-------+-----------+--------------+------------+----------+
+| M001 | SEDAN | BMW E5    | F001         | 2008-12-01 | 200000   |
+| M003 | BUS   | MERCEDEZ  | F001         | 2008-12-01 | 200000   |
+| M002 | SEDAN | HONDA CRV | F003         | 2008-12-02 | 100000   |
+| M004 | BUS   | DYNA      | NULL         | NULL       | NULL     |
+| M005 | TRUCK | HYNO ZX   | NULL         | NULL       | NULL     |
+| M006 | TRUCK | DYNA X1   | NULL         | NULL       | NULL     |
++------+-------+-----------+--------------+------------+----------+
+6 rows in set (0.03 sec)
+MariaDB [latihan14]> select
+    -> sewa.nofaktursewa,
+    -> pelanggan.nama,
+    -> sewa.tglsewa,
+    -> mobil.jenis,
+    -> mobil.merk,
+    -> sewa.lamasewa,
+    -> sewa.uangmuka
+    -> from sewa
+    -> left join pelanggan on sewa.kodepelanggan=pelanggan.kode
+    -> left join mobil on sewa.kodemobil=mobil.kode;
++--------------+--------------+------------+-------+-----------+----------+----------+
+| nofaktursewa | nama         | tglsewa    | jenis | merk      | lamasewa | uangmuka |
++--------------+--------------+------------+-------+-----------+----------+----------+
+| F001         | PT FOX RIVER | 2008-12-01 | SEDAN | BMW E5    | 2        | 200000   |
+| F001         | PT FOX RIVER | 2008-12-01 | BUS   | MERCEDEZ  | 2        | 200000   |
+| F003         | CV FOXCON    | 2008-12-02 | SEDAN | HONDA CRV | 1        | 100000   |
++--------------+--------------+------------+-------+-----------+----------+----------+
+3 rows in set (0.00 sec)
+MariaDB [latihan14]> select
+    -> pelanggan.nama,
+    -> pelanggan.kota,
+    -> sewa.nofaktursewa,
+    -> sewa.tglsewa,
+    -> sewa.kodemobil,
+    -> sewa.lamasewa,
+    -> sewa.uangmuka
+    -> from pelanggan
+    -> left join sewa on pelanggan.kode=sewa.kodepelanggan;
++--------------+----------+--------------+------------+-----------+----------+----------+
+| nama         | kota     | nofaktursewa | tglsewa    | kodemobil | lamasewa | uangmuka |
++--------------+----------+--------------+------------+-----------+----------+----------+
+| PT FOX RIVER | BENGKULU | F001         | 2008-12-01 | M001      | 2        | 200000   |
+| PT FOX RIVER | BENGKULU | F001         | 2008-12-01 | M003      | 2        | 200000   |
+| CV FOXCON    | JAKARTA  | F003         | 2008-12-02 | M002      | 1        | 100000   |
+| PT FARMACON  | LAMPUNG  | NULL         | NULL       | NULL      | NULL     | NULL     |
++--------------+----------+--------------+------------+-----------+----------+----------+
+4 rows in set (0.00 sec)
